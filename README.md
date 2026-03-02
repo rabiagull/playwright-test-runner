@@ -188,13 +188,37 @@ Then rerun:
 cd ../../..
 npm run mytest:run
 ```
+
+---
+
 ## Configuration
 
 `playwright-test-runner` reads options from `mytest.config.json` in the project root:
+
+```json
+{
+  "baseUrl": "http://localhost:3000",
+  "browser": "chromium",
+  "headless": true,
+  "defaultTimeoutMs": 10000,
+  "resultsDir": "results",
+  "artifactsDir": "artifacts"
+}
+```
+
+You can override the config file path via:
+
+```bash
+mytest run --config mytest.config.json
+```
+
+---
+
 ## Tagging & filtering tests
 
 Each test can have `description` and `tags`:
 
+```js
 module.exports = {
   tests: [
     {
@@ -207,15 +231,21 @@ module.exports = {
     }
   ]
 };
+```
+
 Run only tests with a specific tag:
+
+```bash
 npm run mytest:run -- --tag smoke
 # or
 mytest run --tag smoke
+```
 
-### CLI options
+---
 
 ## CLI options
 
+```bash
 mytest run [--config mytest.config.json] \
            [--browser chromium|firefox|webkit] \
            [--headless true|false] \
@@ -224,5 +254,7 @@ mytest run [--config mytest.config.json] \
 
 At the end of a run, a summary is printed, e.g.:
 
+```text
 Summary: 5 passed, 1 failed, 6 total.
+```
 
